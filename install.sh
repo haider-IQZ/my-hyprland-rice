@@ -76,6 +76,7 @@ if ! sudo pacman -S --needed --noconfirm \
     yazi \
     btop \
     neovim \
+    nautilus \
     ttf-jetbrains-mono-nerd \
     ttf-dejavu \
     xdg-desktop-portal-gtk \
