@@ -1,25 +1,25 @@
 -- Auto-generated colors from matugen
 return {
-  background = "#19120c",
-  foreground = "#efe0d5",
+  background = "#0e1415",
+  foreground = "#dee4e4",
   
   -- Base colors
-  color0 = "#19120c",
+  color0 = "#0e1415",
   color1 = "#ffb4ab",
-  color2 = "#feb876",
-  color3 = "#c1cc99",
-  color4 = "#ffdcbf",
-  color5 = "#ffdcbf",
-  color6 = "#e2c0a4",
-  color7 = "#efe0d5",
+  color2 = "#81d3de",
+  color3 = "#b9c6ea",
+  color4 = "#9df0fb",
+  color5 = "#cde7eb",
+  color6 = "#b1cbcf",
+  color7 = "#dee4e4",
   
   -- Bright colors
-  color8 = "#403730",
+  color8 = "#343a3b",
   color9 = "#ffb4ab",
-  color10 = "#feb876",
-  color11 = "#c1cc99",
-  color12 = "#ffdcbf",
-  color13 = "#ffdcbf",
-  color14 = "#e2c0a4",
-  color15 = "#efe0d5",
+  color10 = "#81d3de",
+  color11 = "#b9c6ea",
+  color12 = "#9df0fb",
+  color13 = "#cde7eb",
+  color14 = "#b1cbcf",
+  color15 = "#dee4e4",
 }
