@@ -25,6 +25,10 @@ return {
                   ["async-recursion"] = { "async_recursion" },
                 },
               },
+              -- Disable inlay hints
+              inlayHints = {
+                enable = false,
+              },
             },
           },
         },
