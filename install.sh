@@ -75,6 +75,7 @@ if ! sudo pacman -S --needed --noconfirm \
     polkit-gnome \
     yazi \
     btop \
+    neovim \
     ttf-jetbrains-mono-nerd \
     ttf-dejavu \
     xdg-desktop-portal-gtk \
@@ -129,7 +130,7 @@ print_msg "Backing up existing configurations..."
 BACKUP_DIR="$HOME/.config_backup_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$BACKUP_DIR"
 
-for dir in hypr waybar foot rofi swaync cava fastfetch wlogout matugen; do
+for dir in hypr waybar foot rofi swaync cava fastfetch wlogout matugen nvim; do
     if [ -d "$HOME/.config/$dir" ]; then
         print_msg "Backing up $dir..."
         cp -r "$HOME/.config/$dir" "$BACKUP_DIR/" 2>/dev/null || true

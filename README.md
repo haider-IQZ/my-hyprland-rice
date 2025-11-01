@@ -39,6 +39,7 @@ The script will:
 - **Hyprland** - Wayland compositor
 - **Waybar** - Status bar with custom modules
 - **Foot** - Fast and lightweight terminal emulator
+- **Neovim (LazyVim)** - Modern IDE experience with LSP, Telescope, and more
 - **Rofi** - Application launcher & wallpaper picker
 - **swww** - Wallpaper manager with transitions
 - **Matugen** - Color scheme generator
