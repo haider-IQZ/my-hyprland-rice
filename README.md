@@ -38,7 +38,7 @@ The script will:
 ### Core Components
 - **Hyprland** - Wayland compositor
 - **Waybar** - Status bar with custom modules
-- **Kitty** - Terminal emulator
+- **Foot** - Fast and lightweight terminal emulator
 - **Rofi** - Application launcher & wallpaper picker
 - **swww** - Wallpaper manager with transitions
 - **Matugen** - Color scheme generator
@@ -96,7 +96,7 @@ Supported formats: `.jpg`, `.jpeg`, `.png`, `.gif`
 All configs are in `~/.config/`:
 - `hypr/` - Hyprland configuration
 - `waybar/` - Waybar config and styles
-- `kitty/` - Terminal config
+- `foot/` - Terminal config
 - `rofi/` - Launcher config
 - `swaync/` - Notification config
 - `wlogout/` - Logout menu config
