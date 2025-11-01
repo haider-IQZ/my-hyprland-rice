@@ -29,8 +29,8 @@
 	],
 
 "modules-right": [
-        //"mpris",
-        //"custom/separator#dot-line",
+        "mpris",
+        "custom/separator#blank",
         "group/notify",	
 	"battery",
 	"custom/separator#blank",  
