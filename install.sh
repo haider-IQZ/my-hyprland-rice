@@ -146,10 +146,18 @@ print_success "Backup created at $BACKUP_DIR"
 # Copy dotfiles
 print_msg "Installing dotfiles..."
 mkdir -p "$HOME/.config"
-cp -r "$SCRIPT_DIR/.config/"* "$HOME/.config/" 2>/dev/null || true
+
+# Copy each config directory individually
+for dir in "$SCRIPT_DIR/.config/"*/; do
+    if [ -d "$dir" ]; then
+        dirname=$(basename "$dir")
+        print_msg "Copying $dirname..."
+        cp -rf "$dir" "$HOME/.config/" || print_warning "Failed to copy $dirname"
+    fi
+done
 
 if [ -f "$SCRIPT_DIR/.zshrc" ]; then
-    cp "$SCRIPT_DIR/.zshrc" "$HOME/.zshrc" 2>/dev/null || true
+    cp "$SCRIPT_DIR/.zshrc" "$HOME/.zshrc" || print_warning "Failed to copy .zshrc"
 fi
 
 # Copy wallpapers
