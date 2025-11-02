@@ -77,6 +77,7 @@ if ! sudo pacman -S --needed --noconfirm \
     btop \
     neovim \
     nautilus \
+    jq \
     ttf-jetbrains-mono-nerd \
     ttf-dejavu \
     xdg-desktop-portal-gtk \
@@ -122,6 +123,7 @@ echo ""
 # Install each package separately so one failure doesn't stop everything
 paru -S --needed matugen || print_warning "matugen failed or was skipped"
 paru -S --needed wlogout || print_warning "wlogout failed or was skipped"
+paru -S --needed yaru-icon-theme || print_warning "yaru-icon-theme failed or was skipped"
 
 # Get the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -188,7 +190,15 @@ print_success "Dotfiles installed!"
 # Apply custom modifications
 print_msg "Applying custom configurations..."
 
-# Update wallpaper picker script
+# Install dynamic folder colors script
+print_msg "Installing dynamic folder colors script..."
+cp "$SCRIPT_DIR/dynamic-folder-colors.sh" "$HOME/.local/bin/dynamic-folder-colors" 2>/dev/null || {
+    mkdir -p "$HOME/.local/bin"
+    cp "$SCRIPT_DIR/dynamic-folder-colors.sh" "$HOME/.local/bin/dynamic-folder-colors"
+}
+chmod +x "$HOME/.local/bin/dynamic-folder-colors"
+
+# Update wallpaper picker script with dynamic icon colors
 if [ -f "$HOME/.config/hypr/scripts/wppicker.sh" ]; then
     cat > "$HOME/.config/hypr/scripts/wppicker.sh" << 'EOF'
 #!/bin/bash
@@ -209,7 +219,14 @@ SELECTED_PATH="$WALLPAPER_DIR/$SELECTED"
 
 # === SET WALLPAPER ===
 swww img "$SELECTED_PATH" --transition-type fade --transition-duration 2
+
+# === GENERATE COLORS WITH MATUGEN ===
 matugen image "$SELECTED_PATH"
+
+# === UPDATE FOLDER ICON COLORS DYNAMICALLY ===
+if command -v dynamic-folder-colors &> /dev/null; then
+    dynamic-folder-colors &
+fi
 
 # === CREATE SYMLINK ===
 mkdir -p "$(dirname "$SYMLINK_PATH")"
@@ -260,6 +277,39 @@ fi
 
 print_success "Custom configurations applied!"
 
+# Configure green folder icons (Omarchy-style)
+print_msg "Configuring green folder icons..."
+
+# Set default icon theme to Yaru-sage (green folders)
+ICON_THEME="Yaru-sage"
+
+# Create GTK config directories
+mkdir -p "$HOME/.config/gtk-3.0"
+mkdir -p "$HOME/.config/gtk-4.0"
+
+# GTK 3.0 settings
+cat > "$HOME/.config/gtk-3.0/settings.ini" << EOF
+[Settings]
+gtk-icon-theme-name=$ICON_THEME
+gtk-theme-name=Adwaita-dark
+gtk-application-prefer-dark-theme=1
+EOF
+
+# GTK 4.0 settings
+cat > "$HOME/.config/gtk-4.0/settings.ini" << EOF
+[Settings]
+gtk-icon-theme-name=$ICON_THEME
+gtk-theme-name=Adwaita-dark
+gtk-application-prefer-dark-theme=1
+EOF
+
+# Apply via gsettings if available
+if command -v gsettings &> /dev/null; then
+    gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME" 2>/dev/null || true
+fi
+
+print_success "Green folder icons configured (Yaru-sage)!"
+
 # Set initial wallpaper
 print_msg "Setting initial wallpaper..."
 if [ -f "$HOME/.config/wallpapers/0anime1.jpg" ]; then
@@ -287,10 +337,18 @@ echo "  Super + R         - Reload Waybar"
 echo "  Print             - Screenshot"
 echo "  Super + Shift + C - Color picker"
 echo ""
+print_msg "Features:"
+echo "  ✓ Dynamic folder icon colors (changes with wallpaper!)"
+echo "  ✓ Matugen integration for color matching"
+echo "  ✓ Manual icon theme switcher available"
+echo ""
 print_msg "Backup location: $BACKUP_DIR"
 echo ""
 print_warning "NEXT STEPS:"
 print_warning "1. Log out of your current session"
 print_warning "2. Select 'Hyprland' from your login manager"
 print_warning "3. Or run 'Hyprland' from a TTY"
+echo ""
+print_msg "To change icon themes later, run:"
+print_msg "  ./setup-green-icons.sh"
 echo ""

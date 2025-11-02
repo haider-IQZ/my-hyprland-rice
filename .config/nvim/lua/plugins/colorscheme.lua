@@ -15,7 +15,7 @@ return {
         -- Basic highlights
         vim.api.nvim_set_hl(0, "Normal", { fg = colors.foreground, bg = "NONE" })
         vim.api.nvim_set_hl(0, "NormalFloat", { fg = colors.foreground, bg = "NONE" })
-        vim.api.nvim_set_hl(0, "Comment", { fg = colors.color8, italic = true })
+        vim.api.nvim_set_hl(0, "Comment", { fg = "#FFA500", italic = true })
         vim.api.nvim_set_hl(0, "Constant", { fg = colors.color3 })
         vim.api.nvim_set_hl(0, "String", { fg = colors.color2 })
         vim.api.nvim_set_hl(0, "Character", { fg = colors.color2 })
