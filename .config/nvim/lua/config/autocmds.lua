@@ -11,3 +11,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- Disable auto-formatting on save
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.bo[args.buf].formatexpr = nil
+  end,
+})
