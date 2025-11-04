@@ -42,6 +42,10 @@ return {
         vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = colors.color11 })
         vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = colors.color4 })
         vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = colors.color6 })
+        
+        -- Statusline (bottom bar) - black background
+        vim.api.nvim_set_hl(0, "StatusLine", { fg = colors.foreground, bg = "#000000" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { fg = colors.color8, bg = "#000000" })
       end,
     },
   },
